@@ -1,0 +1,25 @@
+
+    <section class="certifications" id="certifications">
+        <div class="container">
+            <h2 class="section-title">Sertifikat & Pelatihan</h2>
+            <div class="cert-grid">
+                @if ($certifications->isEmpty())
+                    <p style="color: var(--gray);">Belum ada data sertifikat.</p>
+                @else
+                    @foreach ($certifications as $item)
+                <div class="cert-card">
+                    <div class="cert-content">
+                        <h4>{{ $item['title'] }}</h4>
+                        <p style="color: var(--gray); font-size: 0.9rem;">{!! nl2br(e((string) $item['description'])) !!}</p>
+                        <button type="button" class="btn btn-outline cert-btn"
+                            onclick='openModal({!! json_encode(asset((string) $item['image']), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) !!})'
+                            style="font-size: 0.8rem; padding: 0.4rem 1.2rem; margin-top: 0.8rem;">
+                            <i class="fas fa-eye"></i> Lihat Sertifikat
+                        </button>
+                    </div>
+                </div>
+                    @endforeach
+                @endif
+            </div>
+        </div>
+    </section>
