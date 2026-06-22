@@ -33,7 +33,7 @@ class MusicTrackController extends Controller
             $safeName = preg_replace('/[^A-Za-z0-9_\-\.]/', '_', $originalName);
             $fileName = time() . '_' . $safeName;
             $request->file('audio_file')->storeAs('audio', $fileName, 'public');
-            $validated['audio_file'] = 'assets/audio/' . $fileName;
+            $validated['audio_file'] = 'audio/' . $fileName;
         }
 
         if ($request->hasFile('cover_image')) {
@@ -41,7 +41,7 @@ class MusicTrackController extends Controller
             $safeName = preg_replace('/[^A-Za-z0-9_\-\.]/', '_', $originalName);
             $fileName = time() . '_' . $safeName;
             $request->file('cover_image')->storeAs('images', $fileName, 'public');
-            $validated['cover_image'] = 'assets/img/' . $fileName;
+            $validated['cover_image'] = 'images/' . $fileName;
         }
 
         MusicTrack::create($validated);
@@ -71,7 +71,7 @@ class MusicTrackController extends Controller
             $safeName = preg_replace('/[^A-Za-z0-9_\-\.]/', '_', $originalName);
             $fileName = time() . '_' . $safeName;
             $request->file('audio_file')->storeAs('audio', $fileName, 'public');
-            $validated['audio_file'] = 'assets/audio/' . $fileName;
+            $validated['audio_file'] = 'audio/' . $fileName;
         }
 
         if ($request->hasFile('cover_image')) {
@@ -82,7 +82,7 @@ class MusicTrackController extends Controller
             $safeName = preg_replace('/[^A-Za-z0-9_\-\.]/', '_', $originalName);
             $fileName = time() . '_' . $safeName;
             $request->file('cover_image')->storeAs('images', $fileName, 'public');
-            $validated['cover_image'] = 'assets/img/' . $fileName;
+            $validated['cover_image'] = 'images/' . $fileName;
         }
 
         $music->update($validated);
