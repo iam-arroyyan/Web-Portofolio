@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\SiteSetting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SettingController extends Controller
 {
@@ -30,8 +31,8 @@ class SettingController extends Controller
         
         if ($request->hasFile('profile_image')) {
             $fileName = time() . '_' . $request->file('profile_image')->getClientOriginalName();
-            $request->file('profile_image')->move(public_path('assets/img'), $fileName);
-            $data['profile_image'] = 'assets/img/' . $fileName;
+            $request->file('profile_image')->storeAs('images', $fileName, 'public');
+            $data['profile_image'] = 'images/' . $fileName;
         }
 
         $settings->fill($data)->save();

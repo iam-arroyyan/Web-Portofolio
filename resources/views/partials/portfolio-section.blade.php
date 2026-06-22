@@ -16,7 +16,7 @@
                         ?>
                 <div class="portfolio-card">
                     <div class="portfolio-card-image">
-                        <img src="{{ asset($item->image) }}" alt="{{ $imgAlt }}">
+                        <img src="{{ Storage::url($item->image) }}" alt="{{ $imgAlt }}">
                     </div>
                     <div class="portfolio-card-body">
                         <h3>{{ $item['title'] }}</h3>

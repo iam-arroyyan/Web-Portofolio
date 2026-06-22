@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Portfolio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PortfolioController extends Controller
 {
@@ -22,8 +23,7 @@ class PortfolioController extends Controller
             'image' => 'required|image|max:2048'
         ]);
         if ($request->hasFile('image')) {
-            $data['image'] = 'assets/img/portfolio/' . $request->file('image')->getClientOriginalName();
-            $request->file('image')->move(public_path('assets/img/portfolio'), $request->file('image')->getClientOriginalName());
+            $data['image'] = $request->file('image')->storeAs('portfolio', $request->file('image')->getClientOriginalName(), 'public');
         }
         Portfolio::create($data);
         return redirect()->route('admin.portfolio.index')->with('success', 'Portofolio berhasil ditambahkan.');
@@ -40,8 +40,7 @@ class PortfolioController extends Controller
             'image' => 'nullable|image|max:2048'
         ]);
         if ($request->hasFile('image')) {
-            $data['image'] = 'assets/img/portfolio/' . $request->file('image')->getClientOriginalName();
-            $request->file('image')->move(public_path('assets/img/portfolio'), $request->file('image')->getClientOriginalName());
+            $data['image'] = $request->file('image')->storeAs('portfolio', $request->file('image')->getClientOriginalName(), 'public');
         }
         $portfolio->update($data);
         return redirect()->route('admin.portfolio.index')->with('success', 'Portofolio berhasil diperbarui.');

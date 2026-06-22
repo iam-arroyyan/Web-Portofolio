@@ -51,7 +51,7 @@
             <div class="hero-image">
                 <div class="profile-photo-wrapper">
                     <div class="profile-photo">
-                        <img src="{{ asset($siteSettings['profile_image']) }}" alt="{{ $siteSettings['full_name'] }}">
+                        <img src="{{ Storage::url($siteSettings['profile_image']) }}" alt="{{ $siteSettings['full_name'] }}">
                     </div>
                 </div>
             </div>
@@ -294,7 +294,7 @@
             if (e.key === 'Escape') closeModal();
         });
 
-        const playlist = {!! $musicTracks->map(function($track) { return ["title" => $track->title, "artist" => $track->artist, "src" => asset($track->audio_file), "cover" => $track->cover_image ? asset($track->cover_image) : ""]; })->toJson() !!};
+        const playlist = {!! $musicTracks->map(function($track) { return ["title" => $track->title, "artist" => $track->artist, "src" => Storage::url($track->audio_file), "cover" => $track->cover_image ? Storage::url($track->cover_image) : ""]; })->toJson() !!};
 
         if (playlist.length === 0) {
             playlist.push({

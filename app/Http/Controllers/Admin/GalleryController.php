@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
@@ -18,8 +19,7 @@ class GalleryController extends Controller
             'image' => 'required|image|max:2048'
         ]);
         if ($request->hasFile('image')) {
-            $data['image'] = 'assets/img/gallery/' . $request->file('image')->getClientOriginalName();
-            $request->file('image')->move(public_path('assets/img/gallery'), $request->file('image')->getClientOriginalName());
+            $data['image'] = $request->file('image')->storeAs('gallery', $request->file('image')->getClientOriginalName(), 'public');
         }
         Gallery::create($data);
         return redirect()->route('admin.gallery.index')->with('success', 'Foto ditambahkan.');

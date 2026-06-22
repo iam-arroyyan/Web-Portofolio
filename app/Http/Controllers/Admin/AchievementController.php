@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Achievement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AchievementController extends Controller
 {
@@ -21,8 +22,7 @@ class AchievementController extends Controller
             'image' => 'nullable|image|max:2048'
         ]);
         if ($request->hasFile('image')) {
-            $data['image'] = 'assets/img/achievements/' . $request->file('image')->getClientOriginalName();
-            $request->file('image')->move(public_path('assets/img/achievements'), $request->file('image')->getClientOriginalName());
+            $data['image'] = $request->file('image')->storeAs('achievements', $request->file('image')->getClientOriginalName(), 'public');
         }
         Achievement::create($data);
         return redirect()->route('admin.achievements.index')->with('success', 'Prestasi ditambahkan.');
@@ -38,8 +38,7 @@ class AchievementController extends Controller
             'image' => 'nullable|image|max:2048'
         ]);
         if ($request->hasFile('image')) {
-            $data['image'] = 'assets/img/achievements/' . $request->file('image')->getClientOriginalName();
-            $request->file('image')->move(public_path('assets/img/achievements'), $request->file('image')->getClientOriginalName());
+            $data['image'] = $request->file('image')->storeAs('achievements', $request->file('image')->getClientOriginalName(), 'public');
         }
         $achievement->update($data);
         return redirect()->route('admin.achievements.index')->with('success', 'Prestasi diperbarui.');

@@ -20,7 +20,7 @@
         <input type="file" name="{{ $name }}" class="drop-zone__input" id="input-{{ $name }}" accept="{{ $accept }}" {{ $required ? 'required' : '' }}>
         
         @if($currentImage)
-            <div class="drop-zone__thumb" data-label="File Saat Ini" style="background-image: url('{{ asset($currentImage) }}');"></div>
+            <div class="drop-zone__thumb" data-label="File Saat Ini" style="background-image: url('{{ Storage::url($currentImage) }}');"></div>
         @elseif($currentFile)
             <div class="drop-zone__thumb" data-label="{{ basename($currentFile) }}" style="background-color: #009578; display: flex; align-items: center; justify-content: center;"><i class="fas fa-file-audio" style="font-size: 3rem; color: white;"></i></div>
         @endif

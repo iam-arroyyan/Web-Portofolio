@@ -10,7 +10,7 @@
                     @foreach ($galleries as $item)
                         <?php $imgPath = (string) $item['image']; ?>
                 <div class="gallery-item">
-                    <img src="{{ asset($imgPath) }}" alt="{{ basename($imgPath) }}">
+                    <img src="{{ Storage::url($imgPath) }}" alt="{{ basename($imgPath) }}">
                 </div>
                     @endforeach
                 @endif

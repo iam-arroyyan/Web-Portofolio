@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Certification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CertificationController extends Controller
 {
@@ -20,8 +21,7 @@ class CertificationController extends Controller
             'image' => 'required|image|max:2048'
         ]);
         if ($request->hasFile('image')) {
-            $data['image'] = 'assets/img/certifications/' . $request->file('image')->getClientOriginalName();
-            $request->file('image')->move(public_path('assets/img/certifications'), $request->file('image')->getClientOriginalName());
+            $data['image'] = $request->file('image')->storeAs('certifications', $request->file('image')->getClientOriginalName(), 'public');
         }
         Certification::create($data);
         return redirect()->route('admin.certifications.index')->with('success', 'Sertifikat berhasil ditambahkan.');
@@ -36,8 +36,7 @@ class CertificationController extends Controller
             'image' => 'nullable|image|max:2048'
         ]);
         if ($request->hasFile('image')) {
-            $data['image'] = 'assets/img/certifications/' . $request->file('image')->getClientOriginalName();
-            $request->file('image')->move(public_path('assets/img/certifications'), $request->file('image')->getClientOriginalName());
+            $data['image'] = $request->file('image')->storeAs('certifications', $request->file('image')->getClientOriginalName(), 'public');
         }
         $certification->update($data);
         return redirect()->route('admin.certifications.index')->with('success', 'Sertifikat diperbarui.');

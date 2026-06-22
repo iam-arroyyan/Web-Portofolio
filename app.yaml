@@ -1,0 +1,31 @@
+runtime: php82
+
+env_variables:
+  # Put production environment variables here
+  APP_ENV: production
+  APP_DEBUG: false
+  APP_URL: "https://YOUR_PROJECT_ID.appspot.com"
+  
+  # Configure this to the exact cloud_sql_instances connection string
+  # e.g., "project-id:region:instance-name"
+  # DB_SOCKET: "/cloudsql/project-id:region:instance-name"
+  # DB_HOST: "127.0.0.1" # In GAE, leave host empty or use localhost if using socket
+
+  # Storage configuration
+  # FILESYSTEM_DISK: gcs
+  # FILESYSTEM_PUBLIC_DISK: gcs
+  # GOOGLE_CLOUD_PROJECT_ID: "YOUR_PROJECT_ID"
+  # GOOGLE_CLOUD_STORAGE_BUCKET: "YOUR_PROJECT_ID.appspot.com"
+  
+  LOG_CHANNEL: stderr
+  SESSION_DRIVER: database
+  CACHE_STORE: database
+
+handlers:
+  - url: /.*
+    script: public/index.php
+
+  # Optional: Serve static assets directly if you want to bypass PHP
+  # - url: /(.*\.(gif|png|jpg|webp|css|js|svg|ico))$
+  #   static_files: public/\1
+  #   upload: public/.*\.(gif|png|jpg|webp|css|js|svg|ico)$

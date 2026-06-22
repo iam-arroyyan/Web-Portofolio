@@ -21,7 +21,7 @@
                 <tr>
                     <td>
                         @if($item->cover_image)
-                            <img src="{{ asset($item->cover_image) }}" alt="Cover" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
+                            <img src="{{ Storage::url($item->cover_image) }}" alt="Cover" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
                         @else
                             <div style="width: 50px; height: 50px; background: #eee; border-radius: 5px; display: flex; align-items: center; justify-content: center;"><i class="fas fa-music text-muted"></i></div>
                         @endif
