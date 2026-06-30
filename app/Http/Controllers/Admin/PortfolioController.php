@@ -17,7 +17,7 @@ class PortfolioController extends Controller
     public function store(Request $request) {
         $data = $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'description' => 'required|string',
             'tech_stack' => 'nullable|string|max:255',
             'project_link' => 'nullable|url|max:255',
             'image' => 'required|image|max:2048'
@@ -34,7 +34,7 @@ class PortfolioController extends Controller
     public function update(Request $request, Portfolio $portfolio) {
         $data = $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'description' => 'required|string',
             'tech_stack' => 'nullable|string|max:255',
             'project_link' => 'nullable|url|max:255',
             'image' => 'nullable|image|max:2048'
